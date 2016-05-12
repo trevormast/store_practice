@@ -1,8 +1,9 @@
 <% if notice %>
-<p id ="notice"> <%= notice %> </p>
+<p id="notice"><%= notice %></p>
 <% end %>
 
-<h1> Catalogue </h1>
+<h1>Catalog</h1>
+
 <% cache ['store', Product.latest] do %>
   <% @products.each do |product| %>
     <% cache ['entry', product] do %>
@@ -12,6 +13,7 @@
         <p><%= sanitize(product.description) %></p>
         <div class="price_line">
           <span class="price"><%= number_to_currency(product.price) %></span>
+          <%= button_to 'Add to Cart', line_items_path(product_id: product) %>
         </div>
       </div>
     <% end %>
